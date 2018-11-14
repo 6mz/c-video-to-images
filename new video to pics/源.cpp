@@ -11,8 +11,8 @@ int GetRate(const String videoName, double& rate, double& count);
 
 int main()
 {
-	String path = "E:\\data\\img\\RGB\\20181107\\";
-	String videoName = "VID_19710616_080230.mp4";
+	String path = "E:\\data\\img\\20181107\\VIDEO\\";
+	String videoName = "VID_19710616_075055.mp4";
 	String videoNames = path + videoName;
 	double count, rate;
 	size_t rows, cols;
@@ -45,22 +45,40 @@ int main()
 	ncols = cols / 2;
 
 
-	int diff = 1;
+	
 	String imgpath = "E:\\data\\imgFromVideo\\";
-	String foldName = "A\\";
+	String foldName = "D\\";
 	String imgName1 = "img";
 	String imgName2 = ".jpg";
 	imgpath += foldName;
 
+
 	int id = 0;
+	int idnum = 40;//最大输出图片数
+	int start_frame = 30;//开始帧
+	int end_frame = 100;//最晚结束帧
+	int diff = 1;//间隔
+
+	if (end_frame > (int)count - 1)
+	{
+		end_frame = (int)count - 1;
+	}
 	for (int i = 1; capture.read(frame); i++)
 	{
+		if (i < start_frame)
+		{
+			continue;
+		}
+		if (i > end_frame)
+		{
+			break;
+		}
 		if (!(i%diff))
 		{
 			transpose(frame, frame);
 			imwrite(imgpath + imgName1 + to_string(id) + imgName2, frame);
 			id++;
-			if (id >= 40)
+			if (id >= idnum)
 			{
 				break;
 			}
