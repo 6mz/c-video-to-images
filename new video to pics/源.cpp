@@ -11,8 +11,17 @@ int GetRate(const String videoName, double& rate, double& count);
 
 int main()
 {
-	String path = "E:\\data\\img\\RGB\\20181107\\";
-	String videoName = "VID_19710616_080230.mp4";
+	String path = "E:\\data\\img\\20181107\\VIDEO";
+	String videoName = "VID_19710616_022025.mp4";
+
+	int diff = 1;
+	int pics = 40;
+	String imgpath = "E:\\data\\imgFromVideo\\20181127\\";
+	String foldName = "0000\\";
+	String imgName1 = "img";
+	String imgName2 = ".jpg";
+
+
 	String videoNames = path + videoName;
 	double count, rate;
 	size_t rows, cols;
@@ -44,12 +53,6 @@ int main()
 	nrows = rows / 2;
 	ncols = cols / 2;
 
-
-	int diff = 1;
-	String imgpath = "E:\\data\\imgFromVideo\\";
-	String foldName = "A\\";
-	String imgName1 = "img";
-	String imgName2 = ".jpg";
 	imgpath += foldName;
 
 	int id = 0;
@@ -60,7 +63,7 @@ int main()
 			transpose(frame, frame);
 			imwrite(imgpath + imgName1 + to_string(id) + imgName2, frame);
 			id++;
-			if (id >= 40)
+			if (id >= pics)
 			{
 				break;
 			}
